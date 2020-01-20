@@ -1,11 +1,11 @@
 {
-  "name": "mplbank-auth",
+  "name": "ws-rest",
   "version": "1.0.0",
   "description": "",
-  "author": "corentin.grard@ibm.com",
+  "author": "corentin.grard@gmail.com",
   "repository": {
     "type": "git",
-    "url": "https://github.ibm.com/MPLbank/mplbank-auth.git"
+    "url": "https://github.com/CorentinGrard/ws-rest.git"
   },
   "main": "index.js",
   "scripts": {
