@@ -22,7 +22,7 @@ function vols(req, res, next) {
 }
 
 function set(req, res, next) {
-  service.set(req.body)
+  service.set()
     .then((v) => res.json(v))
     .catch(err => next(err));
 }
