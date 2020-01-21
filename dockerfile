@@ -1,11 +1,11 @@
 FROM node:lts
 
 # create destination directory
-RUN mkdir -p /usr/src/MPLbank_auth
-WORKDIR /usr/src/MPLbank_auth
+RUN mkdir -p /usr/src/ws-rest
+WORKDIR /usr/src/ws-rest
 
 # copy the app, note .dockerignore
-COPY . /usr/src/MPLbank_auth/
+COPY . /usr/src/ws-rest/
 RUN npm install
 
 # expose 5000 on container
