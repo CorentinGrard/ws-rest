@@ -2,10 +2,18 @@ const express = require('express');
 const router = express.Router();
 const service = require('./service');
 
+var session = require("express-session");
+const Keycloak = require("keycloak-connect");
+var memoryStore = new session.MemoryStore();
+var keycloak = new Keycloak({
+  store: memoryStore
+});
+
+
 // routes
-router.get('/vol/:id', vol);
-router.get('/vol', vols);
-router.get('/set', set);
+router.get('/vol/:id', keycloak.protect(), vol);
+router.get('/vol', keycloak.protect(), vols);
+router.get('/set', keycloak.protect(), set);
 
 module.exports = router;
 

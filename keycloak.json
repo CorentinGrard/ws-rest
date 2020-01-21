@@ -2,7 +2,8 @@
   "realm": "ws",
   "bearer-only": true,
   "auth-server-url": "http://localhost:8080/auth",
-  "ssl-required": "external",
+  "ssl-required": "none",
   "resource": "wsapi",
-  "confidential-port": 0
+  "confidential-port": 0,
+   "secret": "81647493-57ad-4822-bd4b-6fa94a22de40"
 }
