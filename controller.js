@@ -7,6 +7,14 @@ const Keycloak = require("keycloak-connect");
 var memoryStore = new session.MemoryStore();
 var keycloak = new Keycloak({
   store: memoryStore
+}, {
+  "realm": "ws",
+  "bearer-only": true,
+  "auth-server-url": "http://" + process.env.KEYCLOAK_HOST + ":" + process.env.KEYCLOAK_PORT + "/auth",
+  "ssl-required": "none",
+  "resource": "wsapi",
+  "confidential-port": 0,
+  "secret": "81647493-57ad-4822-bd4b-6fa94a22de40"
 });
 
 

@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const errorHandler = require("./_helpers/error-handler");
 const Keycloak = require("keycloak-connect");
 var cors = require('cors')
+require('dotenv').config()
 
 app.use(
   bodyParser.urlencoded({
@@ -27,6 +28,14 @@ app.use(
 
 var keycloak = new Keycloak({
   store: memoryStore
+}, {
+  "realm": "ws",
+  "bearer-only": true,
+  "auth-server-url": "http://localhost:8080/auth",
+  "ssl-required": "none",
+  "resource": "wsapi",
+  "confidential-port": 0,
+  "secret": "81647493-57ad-4822-bd4b-6fa94a22de40"
 });
 
 app.use(
@@ -42,6 +51,6 @@ app.use(errorHandler);
 // start server
 const port =
   process.env.NODE_ENV === "production" ? process.env.PORT || 80 : 5000;
-const server = app.listen(port, function() {
+const server = app.listen(port, function () {
   console.log("Server listening on port " + port);
 });
