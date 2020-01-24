@@ -1,0 +1,113 @@
+
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "API of ws-rest to get flights",
+    "version": "1.0.0",
+    "title": "API WS-REST"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:5000/api/v1",
+      "description": "Local developpement server"
+    }
+  ],
+  "paths": {
+    "/vol": {
+      "get": {
+        "summary": "Return all flights",
+        "description": "Return all flights",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON array of all flights",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vol"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbiden access"
+          }
+        }
+      }
+    },
+    "/vol/{id}": {
+      "get": {
+        "summary": "Return a flight",
+        "description": "Return a flight",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "id of the flight",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
+            }
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON object of a flight",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vol"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbiden access"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Vol": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "company": {
+            "type": "string"
+          },
+          "place": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

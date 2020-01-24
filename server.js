@@ -7,6 +7,10 @@ const Keycloak = require("keycloak-connect");
 var cors = require('cors')
 require('dotenv').config()
 
+const swaggerUi = require('swagger-ui-express');
+const openApiDocumentation = require('./openapi.json');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
+
 app.use(
   bodyParser.urlencoded({
     extended: false
