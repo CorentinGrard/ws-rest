@@ -35,11 +35,11 @@ var keycloak = new Keycloak({
 }, {
   "realm": "ws",
   "bearer-only": true,
-  "auth-server-url": "http://localhost:8080/auth",
+  "auth-server-url": "http://" + process.env.KEYCLOAK_HOST + ":" + process.env.KEYCLOAK_PORT + "/auth",
   "ssl-required": "none",
   "resource": "wsapi",
   "confidential-port": 0,
-  "secret": "81647493-57ad-4822-bd4b-6fa94a22de40"
+  "secret": process.env.KEYCLOAK_SECRET
 });
 
 app.use(
@@ -47,7 +47,8 @@ app.use(
 );
 
 // api routes
-app.use("/api/v1", keycloak.protect(), require("./controller"));
+app.use("/api/v1/vol", keycloak.protect(), require("./controller/controller.vol"));
+app.use("/api/v1/hotel", keycloak.protect(),require("./controller/controller.hotel"));
 
 // global error handler
 app.use(errorHandler);
