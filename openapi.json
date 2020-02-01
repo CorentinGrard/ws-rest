@@ -1,4 +1,3 @@
-
 {
   "openapi": "3.0.0",
   "info": {
@@ -6,22 +5,18 @@
     "version": "1.0.0",
     "title": "API WS-REST"
   },
-  "servers": [
-    {
-      "url": "https://localhost:5000/api/v1",
-      "description": "Local developpement server"
-    }
-  ],
+  "servers": [{
+    "url": "https://localhost:5000/api/v1",
+    "description": "Local developpement server"
+  }],
   "paths": {
     "/vol": {
       "get": {
         "summary": "Return all flights",
         "description": "Return all flights",
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
+        "security": [{
+          "BearerAuth": []
+        }],
         "responses": {
           "200": {
             "description": "A JSON array of all flights",
@@ -43,24 +38,20 @@
       "get": {
         "summary": "Return a flight",
         "description": "Return a flight",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "id of the flight",
-            "schema": {
-              "type": "integer",
-              "format": "int64",
-              "minimum": 1
-            }
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "id of the flight",
+          "schema": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
           }
-        ],
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
+        }],
+        "security": [{
+          "BearerAuth": []
+        }],
         "responses": {
           "200": {
             "description": "A JSON object of a flight",
@@ -68,6 +59,65 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Vol"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbiden access"
+          }
+        }
+      }
+    },
+    "/hotel": {
+      "get": {
+        "summary": "Return an hotel",
+        "description": "Return an hotel",
+        "security": [{
+          "BearerAuth": []
+        }],
+        "responses": {
+          "200": {
+            "description": "A JSON array of an hotel",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hotel"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbiden access"
+          }
+        }
+      }
+    },
+    "/hotel/{id}": {
+      "get": {
+        "summary": "Return a Chamber",
+        "description": "Return a Chamber",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "id of the Chamber",
+          "schema": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          }
+        }],
+        "security": [{
+          "BearerAuth": []
+        }],
+        "responses": {
+          "200": {
+            "description": "A JSON object of a Chamber",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Chambre"
                 }
               }
             }
@@ -105,6 +155,29 @@
           },
           "date": {
             "type": "string"
+          }
+        }
+      },
+      "Hotel": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Chambre"
+        }
+      },
+      "Chambre": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "integer"
+          },
+          "prix": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string"
+          },
+          "occupe": {
+            "type": "boolean"
           }
         }
       }
